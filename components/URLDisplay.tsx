@@ -11,6 +11,8 @@ export default function URLDisplay({
 }) {
     const [urls, setUrls] = useState(inputURLs);
 
+    console.log("url received", urls);
+
     function append(newUrl: URLProps) {
         setUrls([newUrl, ...urls]);
     }
@@ -23,11 +25,11 @@ export default function URLDisplay({
                     <p>Original: <a href={url.prevURL} target="_blank">{url.prevURL}</a></p>
                     <p>Shortened:
                         <a
-                            href={`https://your-vercel-app.vercel.app/url/newURL/${url.newURL}`}
+                            href={`http://localhost:3000/url/newURL/${url.newURL}`}
                             target="_blank"
                             className="text-blue-600 underline ml-2"
                         >
-                            {`https://your-vercel-app.vercel.app/url/newURL/${url.newURL}`}
+                            {`http://localhost:3000/url/newURL/${url.newURL}`}
                         </a>
                     </p>
                 </div>

@@ -7,8 +7,8 @@ export default async function getAllPosts(): Promise<URLProps[]> {
 
     const urls: URLProps[] = data.map((p) => ({
         id: p._id.toHexString(),
-        prevURL: p.string,
-        newURL: p.string,
+        prevURL: p.prevURL,
+        newURL: p.newURL,
     }));
 
     return urls.reverse();

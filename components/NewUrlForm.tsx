@@ -12,6 +12,9 @@ export default function NewURLForm({
     const [prevURL, setPrevURL] = useState("");
     const [newURL, setNewURL] = useState("");
 
+    console.log("prevURL", prevURL);
+    console.log("newURL", newURL);
+
     return (
     <form
         className="w-96 rounded-xl p-4 bg-sky-400"
@@ -32,9 +35,9 @@ export default function NewURLForm({
     <Textarea
     sx={{
         padding: "0.5rem",
-            height: "100px",
-            width: "100%",
-            borderRadius: 0,
+        height: "100px",
+        width: "100%",
+        borderRadius: 0,
     }}
         variant="soft"
         placeholder="Content"
