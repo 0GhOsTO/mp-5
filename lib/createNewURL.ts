@@ -6,12 +6,18 @@ export default async function createNewURL(
     prevURL: string,
     newURL: string,
 ): Promise<URLProps> {
+
+    const urlCollection = await getCollection(URL_COLLECTION);
+    const exists = await urlCollection.findOne({newURL});
+    if(exists){
+        throw new Error("Alias already exists");
+    }
+
     const p = {
         prevURL: prevURL,
         newURL: newURL,
     };
 
-    const urlCollection = await getCollection(URL_COLLECTION);
     const res = await urlCollection.insertOne({ ...p });
 
     if (!res.acknowledged) {

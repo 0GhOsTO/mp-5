@@ -18,9 +18,20 @@ export default function URLDisplay({
     return (
         <div className="flex flex-col items-center">
             <NewURL append={append} />
-            {/*{posts.map((p) => (*/}
-            {/*    <PostPreview key={p.id} post={p} />*/}
-            {/*))}*/}
+            {urls.map((url) => (
+                <div key={url.newURL} className="p-2 bg-white m-2 rounded shadow">
+                    <p>Original: <a href={url.prevURL} target="_blank">{url.prevURL}</a></p>
+                    <p>Shortened:
+                        <a
+                            href={`https://your-vercel-app.vercel.app/url/newURL/${url.newURL}`}
+                            target="_blank"
+                            className="text-blue-600 underline ml-2"
+                        >
+                            {`https://your-vercel-app.vercel.app/url/newURL/${url.newURL}`}
+                        </a>
+                    </p>
+                </div>
+            ))}
         </div>
     );
 }
