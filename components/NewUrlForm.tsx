@@ -1,6 +1,6 @@
 import createNewURL from "@/lib/createNewURL";
 import { URLProps } from "@/types";
-import {Box, Input} from "@mui/joy";
+import { Input} from "@mui/joy";
 import { Button } from "@mui/material";
 import { useState } from "react";
 
@@ -11,22 +11,35 @@ export default function NewURLForm({
 }) {
     const [prevURL, setPrevURL] = useState("");
     const [newURL, setNewURL] = useState("");
-
-    console.log("prevURL", prevURL);
-    console.log("newURL", newURL);
+    const [errorMsg, setErrorMsg] = useState("");
+    //client side checking
+    const isValidFormat = /^(https?:\/\/)[\w.-]+\.[a-z]{2,}.*$/i.test(prevURL);
+    console.log("###isValid?: ", isValidFormat);
 
     return (
     <form
-        className="w-[96%] rounded-xl p-4 bg-blue-400"
-        onSubmit={(e) => {
+        className="w-[96%] rounded-xl p-4 bg-blue-500"
+        onSubmit={async(e) => {
             e.preventDefault();
-            createNewURL(prevURL, newURL)
-                .then((p) => append(p))
-                .catch((err) => console.error(err));
+            setErrorMsg(""); //Erase the previous error message
+
+            try {
+                append(await createNewURL(prevURL, newURL));
+            }catch (err: unknown) {
+                if (err instanceof Error) {
+                    setErrorMsg(err.message);
+                } else {
+                    setErrorMsg("Something went wrong");
+                }
+            }
+            if(!isValidFormat){
+                setErrorMsg("Invalid format");
+                throw new Error("Invalid format");
+            }
         }}
     >
 
-        <p className="w-[100%] font-semibold text-3xl">Type Original URL</p>
+        <p className="w-[100%] font-semibold text-3xl text-white">Type Original URL</p>
         <Input
         placeholder="Original URL"
         value={prevURL}
@@ -43,17 +56,17 @@ export default function NewURLForm({
         variant="soft"
     />
 
-    <Box
-    sx={{
+    <div
+        className = "w-full"
+    style={{
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
         gap: "1rem",
-        width: "100%",
     }}>
-        <p className="w-fit font-semibold text-3xl whitespace-nowrap">Vercel.app url </p>
+        <p className="w-fit font-semibold text-3xl whitespace-nowrap text-white">Vercel.app url </p>
         <Input
-            placeholder="Alias (e.g. gloogloo)"
+            placeholder="Alias"
             value={newURL}
             onChange={(e) => setNewURL(e.target.value)}
             sx={{
@@ -67,22 +80,23 @@ export default function NewURLForm({
             }}
             variant="soft"
         />
-    </Box>
+    </div>
 
+    <div className="w-full flex justify-center">
+        <Button type="submit" variant="contained"
+                sx={{
+                    width: "100%",
+                    fontSize : 20,
+                    fontWeight: "bold",
+                    backgroundColor: "deepskyblue",
+        }}>
+            Create
+        </Button>
+    </div>
 
-        <div className="w-full flex justify-center">
-            <Button type="submit" variant="contained"
-                    sx={{
-                        width: "100%",
-                        fontSize : 20,
-                        fontWeight: "bold",
-                        backgroundColor: "green",
-            }}>
-                Create
-            </Button>
-        </div>
-
-
+        {errorMsg && (
+            <p className="rounded-md text-center text-2xl text-white bg-red-500">{errorMsg}</p>
+        )}
     </form>
 );
 }

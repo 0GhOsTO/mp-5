@@ -13,6 +13,19 @@ export default async function createNewURL(
         throw new Error("Alias already exists");
     }
 
+    try {
+        //Server side url checking
+        const res = await fetch(prevURL, {method: "HEAD"});
+        console.log("res.ok: ", res.ok);
+        console.log("res.status: ", res.status);
+
+        if(!res.ok || res.status !== 200){
+            throw new Error("URL is not reachable");
+        }
+    }catch{
+        throw new Error("Invalid URL");
+    }
+
     const p = {
         prevURL: prevURL,
         newURL: newURL,

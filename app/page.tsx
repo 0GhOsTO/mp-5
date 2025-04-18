@@ -6,7 +6,7 @@ export default async function Home() {
     console.log("#1 Received existing urls: ", urls);
 
     return (
-        <div className="flex flex-col items-center bg-yellow-400 p-4">
+        <div className="flex flex-col items-center bg-blue-300 p-4">
             <URLDisplay inputURLs={urls} />
         </div>
     );
