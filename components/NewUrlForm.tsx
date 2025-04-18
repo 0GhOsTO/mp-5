@@ -64,7 +64,7 @@ export default function NewURLForm({
         alignItems: "center",
         gap: "1rem",
     }}>
-        <p className="w-fit font-semibold text-3xl whitespace-nowrap text-white">Vercel.app url </p>
+        <p className="w-fit font-semibold text-3xl whitespace-nowrap text-white">https://mp-5-virid-chi.vercel.app/</p>
         <Input
             placeholder="Alias"
             value={newURL}

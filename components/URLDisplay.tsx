@@ -38,11 +38,11 @@ export default function URLDisplay({
                     <p className ="text-2xl"><strong className="text-2xl">Original: </strong><a href={url.prevURL} target="_blank">{url.prevURL}</a></p>
                     <p className ="text-2xl"><strong className="text-2xl">Shortened: </strong>
                         <a
-                            href={`http://localhost:3000/${url.newURL}`}
+                            href={`https://mp-5-virid-chi.vercel.app/${url.newURL}`}
                             target="_blank"
                             className="text-blue-500 underline ml-2"
                         >
-                            {`http://localhost:3000/${url.newURL}`}
+                            {`https://mp-5-virid-chi.vercel.app/${url.newURL}`}
                         </a>
                     </p>
                 </div>
