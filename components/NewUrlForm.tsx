@@ -23,6 +23,12 @@ export default function NewURLForm({
             e.preventDefault();
             setErrorMsg(""); //Erase the previous error message
 
+            if(!isValidFormat){
+                setErrorMsg("Invalid format");
+                throw new Error("Invalid format");
+                return;
+            }
+
             try {
                 append(await createNewURL(prevURL, newURL));
             }catch (err: unknown) {
@@ -31,10 +37,6 @@ export default function NewURLForm({
                 } else {
                     setErrorMsg("Something went wrong");
                 }
-            }
-            if(!isValidFormat){
-                setErrorMsg("Invalid format");
-                throw new Error("Invalid format");
             }
         }}
     >
