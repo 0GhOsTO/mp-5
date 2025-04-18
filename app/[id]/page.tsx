@@ -6,8 +6,9 @@ console.log("###ARRIVED IN DIRECTORY###");
 export default async function MoveOn({
     params,
  }:{
-    params: {id: string }}){
-    const data = await getCollectionById(params.id)
+    params: Promise<{id: string }>;}){
+    const{id} = await params;
+    const data = await getCollectionById(id);
 
     if(!data){
         return redirect("/");
