@@ -1,5 +1,4 @@
 import getCollection, { URL_COLLECTION } from "@/db";
-import {ObjectId} from "mongodb";
 import {URLProps} from "@/types";
 
 export default async function getCollectionById(
