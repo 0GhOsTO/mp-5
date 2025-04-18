@@ -13,7 +13,7 @@ export default function NewURLForm({
     const [newURL, setNewURL] = useState("");
     const [errorMsg, setErrorMsg] = useState("");
     //client side checking
-    const isValidFormat = /^(https?:\/\/)[\w.-]+\.[a-z]{2,}.*$/i.test(prevURL);
+    const isValidFormat = /^(?!.*\s)(https?:\/\/)[\w.-]+\.[a-z]{2,}.*$/i.test(prevURL);
     console.log("###isValid?: ", isValidFormat);
 
     return (
